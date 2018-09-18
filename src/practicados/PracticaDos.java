@@ -178,8 +178,14 @@ public class PracticaDos {
                 sueldoDia = calcularSueldo(horaEntrada, minutosEntrada, horaSalida, minutosSalida, precioHora * 1.5f);
             }
         }else{
-            sueldoDia += calcularSueldo(horaEntrada, minutosEntrada, 20, 00, precioHora);
-            sueldoDia += calcularSueldo(20, 00, horaSalida, minutosSalida, precioHora * 1.5f);
+            //El turno de la hora de entrada es distinto al turno de la hora de salida
+            if(esHorarioDiurno(horaEntrada)){
+                sueldoDia += calcularSueldo(horaEntrada, minutosEntrada, 20, 00, precioHora);
+                sueldoDia += calcularSueldo(20, 00, horaSalida, minutosSalida, precioHora * 1.5f);
+            } else {
+                sueldoDia += calcularSueldo(horaEntrada, minutosEntrada, 8, 00, precioHora * 1.5f);
+                sueldoDia += calcularSueldo(8, 00, horaSalida, minutosSalida, precioHora);
+            }
         }
         printInColor("azul","El sueldo a pagar por el día de trabajo desde las " + 
                 formatoHora(horaEntrada, minutosEntrada) + " hasta las " + 
